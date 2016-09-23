@@ -1,0 +1,71 @@
+{#
+# This file is part of Lifewatch DAAP.
+# Copyright (C) 2015 Ana Yaiza Rodriguez Marrero.
+#
+# Lifewatch DAAP is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Lifewatch DAAP is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Lifewatch DAAP. If not, see <http://www.gnu.org/licenses/>.
+#}
+
+{% extends  "page.html" %}
+
+{% block body %}
+<div class="col-sm-12">
+  <div class="jumbotron" style="border-radius: 0px; background: #F1F1F1 url('{{url_for('static', filename="img/wave.png")}}') no-repeat 100% 100%;">
+
+    <div class="row">
+	<h1>LifeWatch Open Science Framework</h1>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12 col-md-4">
+  <div class="panel panel-primary">
+    <a href="{{ url_for('search') }}">
+      <div class="panel-heading">
+        <i class="fa fa-fw fa-search" ></i>Discover
+      </div>
+    </a>
+    <div class="panel-body">
+      <p>
+      Explore all publicly available uploads at LifeWatch Open Science Framework.</p>
+    </div>
+  </div>
+</div>
+<div class="col-sm-12 col-md-4">
+  <div class="panel panel-primary">
+    <a href="{{ url_for('deposit') }}">
+      <div class="panel-heading">
+        <i class="fa fa-fw fa-share"></i>Share
+      </div>
+    </a>
+
+    <div class="panel-body">
+      <p>Become an active user of the LifeWatch Open Science Framework and upload your records.</p>
+    </div>
+  </div>
+
+</div>
+<div class="col-sm-12 col-md-4">
+  <div class="panel panel-primary">
+    <a href="{{ url_for('analyze') }}">
+
+      <div class="panel-heading">
+        <i class="fa fa-fw fa-bar-chart-o"></i>Analyze
+      </div>
+    </a>
+
+    <div class="panel-body">
+      <p>Profit the analyze feature and access your own work environment.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

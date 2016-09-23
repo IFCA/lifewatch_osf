@@ -7,14 +7,14 @@
 
 
     <!-- UPDATE HERE THE entityID -->
-    <ApplicationDefaults entityID="https://10.14.128.96/shibboleth"
+    <ApplicationDefaults entityID="https://193.146.75.147/Shibboleth.sso"
                          REMOTE_USER="eppn persistent-id targeted-id">
 
         <Sessions lifetime="28800" timeout="3600" relayState="ss:mem"
                   checkAddress="false" handlerSSL="false" cookieProps="http">
 
 	    <!-- May need adjustment -->
-  	    <SSO entityID="http://idp.lifewatch:8080/idp/shibboleth">SAML2 SAML1</SSO>
+  	    <SSO entityID="https://idp.ifca.es/idp/shibboleth">SAML2 SAML1</SSO>
 
             <!-- SAML and local-only logout. -->
             <Logout>SAML2 Local</Logout>
@@ -41,7 +41,7 @@
             styleSheet="/shibboleth-sp/main.css"/>
         
 	<!-- Metadata for the configured IdPs -->
-        <MetadataProvider type="XML" file="idp-metadata.xml" reloadInterval="180000"/>
+        <MetadataProvider type="XML" file="idp-metadata-ifca.xml" reloadInterval="180000"/>
         <MetadataProvider type="XML" file="idp-csic-metadata.xml" reloadInterval="180000"/>
 
 

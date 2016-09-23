@@ -1,7 +1,7 @@
 app:
   build: .
   dockerfile: Dockerfile.app
-  entrypoint: /lwosf/deploy/app/entry.sh
+  #entrypoint: /lwosf/deploy/app/entry.sh
   command: uwsgi --master --process 4 --threads 2 --module lw_daap.uwsgi --socket :3031
   environment:
     - BROKER_URL=redis://cache:6379/1
@@ -11,14 +11,15 @@ app:
   volumes:
     - ./lw_daap/instance_config.py:/lwosf/lw_daap/instance_config.py
   links:
+    - mysql:db
     - redis:cache
+  privileged: true
 
 httpd:
   build: .
   dockerfile: Dockerfile.httpd
   environment:
     - SERVERNAME=localhost
-    - SERVERADMIN=admin@mail.com
     - UWSGI_URI="uwsgi://app:3031"
   volumes_from:
     - app:ro
@@ -30,7 +31,9 @@ httpd:
     - ./deploy/httpd/ssl-cert.key:/etc/ssl/private/ssl-cert.key
     - ./deploy/httpd/shibboleth2.xml:/etc/shibboleth/shibboleth2.xml
     - ./deploy/httpd/attribute-map.xml:/etc/shibboleth/attribute-map.xml
-    - ./deploy/httpd/idp-metadata.xml:/etc/shibboleth/idp-metadata.xml
+#    - ./deploy/httpd/idp-metadata.xml:/etc/shibboleth/idp-metadata.xml
+  # Add metadata for IFCA IdP 
+    - ./deploy/httpd/idp-metadata-ifca.xml:/etc/shibboleth/idp-metadata-ifca.xml
     - ./deploy/httpd/idp-csic-metadata.xml:/etc/shibboleth/idp-csic-metadata.xml
   links:
     - app:app
@@ -54,7 +57,17 @@ celery:
   #volumes:
   #  - ../.globus:/home/lwosf/.globus
   links:
+    - mysql:db
     - redis:cache
 
 redis:
   image: redis
+
+mysql:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=root_password
+  volumes:
+    - /data:/var/lib/mysql
+  ports:
+    - "3306:3306"

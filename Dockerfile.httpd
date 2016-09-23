@@ -13,17 +13,21 @@ MAINTAINER aeonium <info@aeonium.eu>
 # ENV variables that should be overwritten by the docker run command
 # These are used in the Apache config file (see deploy/httpd/lwosf.conf)
 #
+#ENV SERVERNAME localhost
+
 ENV SERVERNAME localhost
 ENV SERVERADMIN admin@localhost
 ENV UWSGI_URI uwsgi://localhost:3031/
 
 RUN apt-get update && \
-    apt-get install -y \
+   apt-get install -y \
         supervisor \
         apache2 \
         libapache2-mod-proxy-uwsgi \
-        libapache2-mod-shib2 && \
-    apt-get clean autoclean && \
+        libapache2-mod-shib2 \
+        bash \
+        vim    #added for editing files in the docker
+RUN    apt-get clean autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/{apt,dpkg}/ && \
     (find /usr/share/doc -depth -type f ! -name copyright -delete || true) && \
@@ -51,6 +55,8 @@ RUN cp /etc/ssl/certs/ssl-cert-snakeoil.pem  /etc/ssl/certs/ssl-cert.pem && \
 
 RUN a2enmod ssl && a2enmod shib2 && a2enmod proxy && a2enmod rewrite && \
     a2dissite 000-default && a2ensite lwosf
+
+#RUN service apache2 reload
 
 EXPOSE 80 443
 

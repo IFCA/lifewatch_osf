@@ -1,7 +1,7 @@
 app:
   build: .
   dockerfile: Dockerfile.app
-  #entrypoint: /lwosf/deploy/app/entry.sh
+  entrypoint: /lwosf/deploy/app/entry.sh
   command: uwsgi --master --process 4 --threads 2 --module lw_daap.uwsgi --socket :3031
   environment:
     - BROKER_URL=redis://cache:6379/1
@@ -9,7 +9,8 @@ app:
     - CELERY_RESULT_BACKEND=redis://cache:6379/1
     - INVENIO_APP_CONFIG_ENVS=BROKER_URL,CELERY_RESULT_BACKEND,CACHE_REDIS_HOST,CFG_DATABASE_HOST
   volumes:
-    - ./lw_daap/instance_config.py:/lwosf/lw_daap/instance_config.py
+    - ./lw_daap:/lwosf/lw_daap/
+    - ./deploy/app/:/lwosf/deploy/app/
   links:
     - mysql:db
     - redis:cache
@@ -18,7 +19,8 @@ httpd:
   build: .
   dockerfile: Dockerfile.httpd
   environment:
-    - SERVERNAME=localhost
+    - SERVERNAME=193.146.75.147
+    - SERVERADMIN=admin@mail.com
     - UWSGI_URI="uwsgi://app:3031"
   volumes_from:
     - app:ro
@@ -51,8 +53,8 @@ celery:
   volumes_from:
     - app
   # Configure here the actual location of the robot certificate
-  #volumes:
-  #  - ../.globus:/home/lwosf/.globus
+  volumes:
+    - ../.globus:/home/lwosf/.globus
   links:
     - mysql:db
     - redis:cache

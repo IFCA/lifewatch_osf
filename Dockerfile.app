@@ -1,4 +1,5 @@
 FROM lwosf:latest
+#FROM lwdaap_app:latest
 MAINTAINER aeonium <info@aeonium.eu>
 
 RUN cat /lwosf/deploy/app/invenio.cfg >> /usr/local/var/invenio.base-instance/invenio.cfg \
