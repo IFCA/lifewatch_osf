@@ -31,6 +31,9 @@
   <a id="btn-deposit-dataset" class="btn btn-block btn-danger   "
     href="{{ url_for("lwdaap_projects.deposit", project_id=project.id, deposition_type="dataset" ) }}"
     role="button"><i class="fa fa-table fa-2x fa-fw valign"></i>Register new dataset</a>
+  <a id="btn-deposit-dataset" class="btn btn-block btn-danger   "
+    href="{{ url_for("lwdaap_projects.deposit", project_id=project.id, deposition_type="dataset" ) }}"
+    role="button"><i class="fa fa-table fa-2x fa-fw valign"></i>Connect to database</a>
   <a id="btn-deposit-software" class="btn btn-block btn-danger  "
     href="{{ url_for("lwdaap_projects.deposit", project_id=project.id, deposition_type="software") }}"
     role="button"><i class="fa fa-cogs fa-fw fa-2x valign"></i>Register new software</a>

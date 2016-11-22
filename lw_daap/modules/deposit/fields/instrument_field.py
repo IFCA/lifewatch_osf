@@ -46,9 +46,9 @@ from wtforms import SelectField
 from lw_daap.modules.invenio_deposit.field_base import WebDepositField
 from lw_daap.modules.invenio_deposit.processor_utils import set_flag
 from invenio.modules.knowledge.api import get_kb_mappings
-from lw_daap.modules.instruments.service_utils import getAllInstruments
-from lw_daap.modules.instruments.service_utils import getInstrument
-from lw_daap.modules.instruments.service_utils import getUsergroupByIdInstrument
+#FERfrom lw_daap.modules.instruments.service_utils import getAllInstruments
+#FERfrom lw_daap.modules.instruments.service_utils import getInstrument
+#FERfrom lw_daap.modules.instruments.service_utils import getUsergroupByIdInstrument
 from datetime import datetime
 from werkzeug import MultiDict
 from flask import current_app
@@ -123,15 +123,15 @@ class InstrumentField(WebDepositField, SelectField):
 
         if 'choices' not in kwargs:
             #current_app.logger.debug('Obtengo los instrumentos')
-            instruments = getAllInstruments()
+        #FER    instruments = getAllInstruments()
             #current_app.logger.debug('Hecho')
-            instruments_json = json.loads(instruments)
+        #FER    instruments_json = json.loads(instruments)
             #current_app.logger.debug('Cargo json')
             #current_app.logger.debug(instruments_json)
             choices = [("-1", 'Select an instruments')]
-            for instrument in instruments_json:
-                choices.append((str(instrument['idInstrument']), str(instrument['name'])))
+            #FERfor instrument in instruments_json:
+            #FER    choices.append((str(instrument['idInstrument']), str(instrument['name'])))
 
             kwargs['choices'] = choices
-        kwargs['processors'] = [set_flag('touched'),instrument_processor, ]
+        #FERkwargs['processors'] = [set_flag('touched'),instrument_processor, ]
         super(InstrumentField, self).__init__(**kwargs)

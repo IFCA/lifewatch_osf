@@ -947,18 +947,18 @@ class DatasetForm(BasicForm):
         min_entries=1,
     )
 
-    instrument = zfields.InstrumentField(
-        validators=[
-            validators.optional()
-        ],
-        default='-1',
-        description='Instrument used for data collection.',
-        filters=[
-            strip_string,
-        ],
-        placeholder="Start typing an instruments name or abbreviation...",
-        icon='fa fa-fw',
-    )
+    #FERinstrument = zfields.InstrumentField(
+    #FER    validators=[
+    #FER        validators.optional()
+    #FER    ],
+    #FER    default='-1',
+    #FER    description='Instrument used for data collection.',
+    #FER    filters=[
+    #FER        strip_string,
+    #FER    ],
+    #FER    placeholder="Start typing an instruments name or abbreviation...",
+    #FER    icon='fa fa-fw',
+    #FER)
 
     #
     # Form configuration

@@ -13,4 +13,7 @@ RUN cat /lwosf/deploy/app/invenio.cfg >> /usr/local/var/invenio.base-instance/in
 
 VOLUME /usr/local/var
 
+COPY deploy/app/collect.html /lwosf/lw_daap/modules/projects/templates/projects/collect.html
+COPY deploy/app/analyze.html /lwosf/lw_daap/modules/projects/templates/projects/analyze.html
+
 CMD ["bash"]
