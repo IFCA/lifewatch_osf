@@ -11,8 +11,8 @@ CFG_SITE_SECURE_URL = 'https://193.146.75.147'
 
 #
 # Configure here the emails shown for contact in the portal
-CFG_SITE_SUPPORT_EMAIL = "support-lwosf@someserver.com"
-CFG_SITE_ADMIN_EMAIL = "admin-lwosf@someserver.com"
+CFG_SITE_SUPPORT_EMAIL = "grid.support@ifca.unican.es"
+CFG_SITE_ADMIN_EMAIL = "grid.support@ifca.unican.es"
 
 #
 # Database configuration
