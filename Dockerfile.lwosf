@@ -1,6 +1,7 @@
 FROM ubuntu:trusty
-MAINTAINER aeonium <info@aeonium.eu>
+#MAINTAINER aeonium <info@aeonium.eu>
 
+MAINTAINER david 
 ##########################################################################################################
 # this is taken from the python images of docker
 # https://github.com/docker-library/python/
