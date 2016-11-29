@@ -16,8 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with Lifewatch DAAP. If not, see <http://www.gnu.org/licenses/>.
 
-#testing
-
 from setuptools import setup
 from setuptools import setup, find_packages
 packages = find_packages()
