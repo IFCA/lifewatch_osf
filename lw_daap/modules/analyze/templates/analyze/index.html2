@@ -1,0 +1,108 @@
+{#
+ # This file is part of Lifewatch DAAP.
+ # Copyright (C) 2015 Ana Yaiza Rodriguez Marrero.
+ #
+ # Lifewatch DAAP is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version.
+ #
+ # Lifewatch DAAP is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with Lifewatch DAAP. If not, see <http://www.gnu.org/licenses/>.
+ #}
+
+{% extends "page.html" %}
+{%- from "analyze/modals.html" import terminate_modal, connector_modal with context %}
+
+{% block global_bundles %}
+  {{ super() }}
+  {% bundles "analyze.js" %}
+{% endblock %}
+
+{% block javascript %}
+{{ super() }}
+<script type="text/javascript">
+  require(
+    [
+      "jquery",
+      "js/analyze/terminator",
+      "js/analyze/connector"
+    ],
+    function($, terminator, connector) {
+        terminator.attachTo(".vm-terminator")
+        connector.attachTo(".vm-connector")
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+  <div class="col-md-10">
+  <div class="panel-list-wrapper">
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h4><i class="fa fa-fw fa-laptop"></i> Your instances</h4>
+  </div> 
+    <table class="table table-stripped">
+      <thead>
+        <tr>
+          <th class="col-md-2">Instance Name</th>
+          <th class="col-md-1">OS</th>
+          <th class="col-md-3">Size</th>
+          <th class="col-md-1">Env.</th>
+          <th class="col-md-1">Status</th>
+          <th class="col-md-2">Created</th>
+          <th class="col-md-3"></th>
+        </tr>
+      </thead>
+      <tbody>
+    {% if vms %}
+      {% for vm in vms %}
+        <tr>
+          <td>{{ vm.name }}</td>
+          <td>{{ vm.image }}</td>
+          <td>{{ vm.size }}</td>
+          <td>{{ vm.app_env }}</td>
+          <td>{{ vm.status }}</td>
+          <td>{{ vm.created }}</td>
+          <td class="text-right">
+            <a class="btn btn-sm btn-primary vm-connector" data-vm-status="{{ vm.status.lower() }}"
+               data-connect-url="{{ url_for('.connect', vm_id=vm.id) }}" href="#">
+                <i class="fa fa-external-link" ></i> Connect
+            </a>
+            <a class="btn btn-sm btn-warning vm-terminator" data-vm-name="{{ vm.name }}" 
+               data-terminate-url="{{ url_for('.terminate', vm_id=vm.id) }}" href="#">
+                <i class="fa fa-power-off"></i> Terminate
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+        
+    {% else %} 
+       <tr> 
+        <td colspan=7 class="text-center">
+            <h2>You have no analysis instances!</h2>
+            <h3>Go and run some</h3>
+        </td>
+       </tr>
+    {% endif %}
+      </tbody>
+    </table>
+  </div> 
+  </div> 
+  </div> 
+
+  <div class="col-md-2">
+    <a href="{{ url_for('.launch') }}" class="btn btn-primary ">Run an analysis</a>
+  </div> 
+</div>
+
+{{ terminate_modal() }}
+{{ connector_modal() }}
+
+{% endblock body %}

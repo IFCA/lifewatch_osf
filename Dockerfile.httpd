@@ -13,17 +13,23 @@ MAINTAINER aeonium <info@aeonium.eu>
 # ENV variables that should be overwritten by the docker run command
 # These are used in the Apache config file (see deploy/httpd/lwosf.conf)
 #
+#ENV SERVERNAME localhost
+
 ENV SERVERNAME localhost
 ENV SERVERADMIN admin@localhost
 ENV UWSGI_URI uwsgi://localhost:3031/
 
 RUN apt-get update && \
-    apt-get install -y \
+   apt-get install -y \
         supervisor \
         apache2 \
+        php5 \		#added for executing php and mysql code
         libapache2-mod-proxy-uwsgi \
-        libapache2-mod-shib2 && \
-    apt-get clean autoclean && \
+        libapache2-mod-shib2 \
+        bash \
+        vim \   	#added for editing files in the docker
+        python-pip	#added for installing python libraries
+RUN    apt-get clean autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/{apt,dpkg}/ && \
     (find /usr/share/doc -depth -type f ! -name copyright -delete || true) && \
@@ -37,6 +43,14 @@ RUN update-rc.d -f apache2 remove && \
 COPY deploy/httpd/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY deploy/httpd/lwosf.conf /etc/apache2/sites-available/lwosf.conf
 COPY deploy/httpd/setup_shib.sh /root/setup_shib.sh
+COPY deploy/httpd/php.ini /etc/php5/apache2/php.ini		#added for enabling mysql module
+COPY deploy/httpd/php5.conf /etc/apache2/mods-enabled/php5.conf	#added for executing php code
+COPY deploy/httpd/LifeWatchOpenScienceFramework.html /var/www/html/LifeWatchOpenScienceFramework.html
+COPY deploy/httpd/LifeWatchOpenScienceFramework.php /var/www/html/LifeWatchOpenScienceFramework.php
+COPY deploy/httpd/LifeWatchOpenScienceFramework_files /var/www/html/LifeWatchOpenScienceFramework_files
+COPY deploy/httpd/func_download_database.py /var/www/html/func_download_database.py
+
+RUN chmod 777 /var/www/html/func_download_database.py /var/www/html #added for executing files
 
 RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd \
              /usr/local/var/invenio.base-instance/static \
@@ -51,6 +65,8 @@ RUN cp /etc/ssl/certs/ssl-cert-snakeoil.pem  /etc/ssl/certs/ssl-cert.pem && \
 
 RUN a2enmod ssl && a2enmod shib2 && a2enmod proxy && a2enmod rewrite && \
     a2dissite 000-default && a2ensite lwosf
+
+#RUN service apache2 reload
 
 EXPOSE 80 443
 

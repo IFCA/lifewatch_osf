@@ -50,8 +50,9 @@ warnings.filterwarnings('ignore')
 # Global config
 CFG_SITE_LANGS = ["en"]
 
-CFG_SITE_NAME = "LifeWatch Open Science Framework"
-CFG_SITE_DESCRIPTION = "LifeWatch Open Science Framework DESC"
+CFG_SITE_SHORT_NAME = "Open Science Preservation Framework"
+CFG_SITE_NAME = "LifeWatch Open Science Preservation Framework"
+CFG_SITE_DESCRIPTION = "LifeWatch Open Science Preservation Framework DESC"
 CFG_SITE_NAME_INTL = {
     "en": CFG_SITE_NAME
 }

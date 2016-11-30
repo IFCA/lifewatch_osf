@@ -1,4 +1,5 @@
 FROM lwosf:latest
+#FROM lwdaap_app:latest
 MAINTAINER aeonium <info@aeonium.eu>
 
 RUN cat /lwosf/deploy/app/invenio.cfg >> /usr/local/var/invenio.base-instance/invenio.cfg \
@@ -11,5 +12,8 @@ RUN cat /lwosf/deploy/app/invenio.cfg >> /usr/local/var/invenio.base-instance/in
     && inveniomanage assets build
 
 VOLUME /usr/local/var
+
+COPY deploy/app/collect.html /lwosf/lw_daap/modules/projects/templates/projects/collect.html
+COPY deploy/app/analyze.html /lwosf/lw_daap/modules/projects/templates/projects/analyze.html
 
 CMD ["bash"]
