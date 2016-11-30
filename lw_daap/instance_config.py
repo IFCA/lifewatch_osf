@@ -6,13 +6,13 @@
 #
 # Site URLs
 # These _MUST_ be set for proper redirection to login
-CFG_SITE_URL = 'http://localhost'
-CFG_SITE_SECURE_URL = 'https://localhost'
+CFG_SITE_URL = 'http://193.146.75.147'
+CFG_SITE_SECURE_URL = 'https://193.146.75.147'
 
 #
 # Configure here the emails shown for contact in the portal
-CFG_SITE_SUPPORT_EMAIL = "support-lwosf@someserver.com"
-CFG_SITE_ADMIN_EMAIL = "admin-lwosf@someserver.com"
+CFG_SITE_SUPPORT_EMAIL = "grid.support@ifca.unican.es"
+CFG_SITE_ADMIN_EMAIL = "grid.support@ifca.unican.es"
 
 #
 # Database configuration
@@ -20,21 +20,23 @@ CFG_SITE_ADMIN_EMAIL = "admin-lwosf@someserver.com"
 #
 CFG_DATABASE_HOST = 'db'
 CFG_DATABASE_NAME = 'lwosf'
-CFG_DATABASE_USER = 'lwosf'
+CFG_DATABASE_USER = u'lwosf'
+#CFG_DATABASE_USER = u'root'
 CFG_DATABASE_PASS = u'my123p$ss'
+#CFG_DATABASE_PASS = u'root_password'
 CFG_DATABASE_TYPE = u'mysql'
 CFG_DATABASE_PORT = 3306
 
 #
 # IDP entity IDs.
 #
-CFG_IDP_LIFEWATCH = 'https://idp.lifewatch.es/idp/shibboleth'
+CFG_IDP_LIFEWATCH = 'https://idp.ifca.es/idp/shibboleth'
 CFG_IDP_CSIC = 'https://idpcsic.lifewatch.es/idp/shibboleth'
 
 #
 # Use here the URL of the DMPTool instance
 #
-CFG_DMPTOOL_URL = 'http://localhost/dmptool'
+CFG_DMPTOOL_URL = 'https://193.146.75.247/'
 
 #
 # emails configuration
