@@ -68,8 +68,8 @@ def index():
         ctx['vms'] = infra.list_vms(client)
     except infra.InfraException as e:
         flash(e.message, 'error')
-    return render_template('analyze/index.html', **ctx)
-#     return redirect('https://193.146.75.224/hub')   #Redirect to JupyterHub 
+#    return render_template('analyze/index.html', **ctx)
+    return redirect('http://power701.ifca.es')   #Redirect to JupyterHub 
 
 @blueprint.route('/launch', methods=['GET', 'POST'])
 #@permission_required(INFRA_ACCESS)
