@@ -50,6 +50,7 @@ warnings.filterwarnings('ignore')
 # Global config
 CFG_SITE_LANGS = ["en"]
 
+CFG_SITE_REDIRECT_ANALYZE = "http://power701.ifca.es:8000"
 CFG_SITE_SHORT_NAME = "Open Science Preservation Framework"
 CFG_SITE_NAME = "LifeWatch Open Science Preservation Framework"
 CFG_SITE_DESCRIPTION = "LifeWatch Open Science Preservation Framework DESC"

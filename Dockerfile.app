@@ -11,6 +11,10 @@ RUN cat /lwosf/deploy/app/invenio.cfg >> /usr/local/var/invenio.base-instance/in
     && inveniomanage collect \
     && inveniomanage assets build
 
+RUN apt-get update && \
+   apt-get install -y \
+        vim
+
 VOLUME /usr/local/var
 
 COPY deploy/app/collect.html /lwosf/lw_daap/modules/projects/templates/projects/collect.html

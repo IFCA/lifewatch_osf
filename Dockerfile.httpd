@@ -27,7 +27,7 @@ RUN apt-get update && \
         libapache2-mod-proxy-uwsgi \
         libapache2-mod-shib2 \
         bash \
-        vim \   	#added for editing files in the docker
+        #vim \   	#added for editing files in the docker
         python-pip	#added for installing python libraries
 RUN    apt-get clean autoclean && \
     apt-get autoremove -y && \

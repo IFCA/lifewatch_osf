@@ -69,7 +69,8 @@ def index():
 #    except infra.InfraException as e:
 #        flash(e.message, 'error')
 #    return render_template('analyze/index.html', **ctx)
-    return redirect('http://power701.ifca.es:8000')   #Redirect to JupyterHub 
+#    return redirect('http://power701.ifca.es:8000')   #Redirect to JupyterHub 
+    return redirect({{config.CFG_SITE_REDIRECT_ANALYZE}})
 
 @blueprint.route('/launch', methods=['GET', 'POST'])
 #@permission_required(INFRA_ACCESS)
