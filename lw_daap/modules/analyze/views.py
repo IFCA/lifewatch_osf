@@ -34,7 +34,7 @@ from lw_daap.modules.profile.models import UserProfile
 from . import infra
 from .forms import LaunchForm, LaunchFormData
 from .utils import get_requirements
-
+from invenio.config import CFG_SITE_REDIRECT_ANALYZE #added for using in redirect
 
 blueprint = Blueprint(
     'lwdaap_analyze',
@@ -70,7 +70,7 @@ def index():
 #        flash(e.message, 'error')
 #    return render_template('analyze/index.html', **ctx)
 #    return redirect('http://power701.ifca.es:8000')   #Redirect to JupyterHub 
-    return redirect({{config.CFG_SITE_REDIRECT_ANALYZE}})
+    return redirect(CFG_SITE_REDIRECT_ANALYZE)
 
 @blueprint.route('/launch', methods=['GET', 'POST'])
 #@permission_required(INFRA_ACCESS)
